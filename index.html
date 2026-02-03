@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Job Application | New Employee</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+
+<style>
+body{
+  margin:0;
+  background:#f3f4f6;
+  font-family:Arial, Helvetica, sans-serif;
+}
+.container{
+  max-width:700px;
+  margin:40px auto;
+  background:#ffffff;
+  padding:40px;
+  border-radius:10px;
+  box-shadow:0 10px 30px rgba(0,0,0,0.1);
+}
+h1{
+  text-align:center;
+  margin-bottom:30px;
+}
+label{
+  font-weight:bold;
+  display:block;
+  margin-top:15px;
+}
+input, select{
+  width:100%;
+  padding:12px;
+  margin-top:6px;
+  border:1px solid #ccc;
+  border-radius:6px;
+  font-size:16px;
+}
+button{
+  margin-top:30px;
+  width:100%;
+  padding:14px;
+  font-size:18px;
+  background:#ff6a00;
+  color:white;
+  border:none;
+  border-radius:30px;
+  cursor:pointer;
+}
+button:hover{
+  opacity:0.9;
+}
+.success{
+  text-align:center;
+  font-size:18px;
+  color:green;
+}
+</style>
+</head>
+
+<body>
+<div class="container">
+  <h1>New Employee Job Application</h1>
+
+  <form id="jobForm">
+    <label>Full Name</label>
+    <input type="text" name="full_name" required>
+
+    <label>Full Address</label>
+    <input type="text" name="address" required>
+
+    <label>City, State, Zip Code</label>
+    <input type="text" name="city_state_zip" required>
+
+    <label>Phone</label>
+    <input type="tel" name="phone" required>
+
+    <label>Email</label>
+    <input type="email" name="email" required>
+
+    <label>Age</label>
+    <input type="number" name="age" required>
+
+    <label>Eligibility to work in the United States</label>
+    <select name="eligibility" required>
+      <option value="">-- Select --</option>
+      <option value="Yes, authorized to work in the U.S.">Yes</option>
+      <option value="No, not authorized to work in the U.S.">No</option>
+    </select>
+
+    <label>Employment Status</label>
+    <select name="employment_status" required>
+      <option value="">-- Select --</option>
+      <option value="Employed">Employed</option>
+      <option value="Unemployed">Unemployed</option>
+      <option value="Self-Employed">Self-Employed</option>
+      <option value="Student">Student</option>
+    </select>
+
+    <button type="submit">Submit Application</button>
+  </form>
+
+  <div id="successMessage" class="success" style="display:none;">
+    ✅ Application submitted successfully. Thank you!
+  </div>
+</div>
+
+<script>
+  (function(){
+    emailjs.init("YOUR_PUBLIC_KEY"); // 🔴 replace this
+  })();
+
+  document.getElementById("jobForm").addEventListener("submit", function(e){
+    e.preventDefault();
+
+    emailjs.sendForm(
+      "YOUR_SERVICE_ID",   // 🔴 replace this
+      "YOUR_TEMPLATE_ID",  // 🔴 replace this
+      this
+    ).then(function(){
+      document.getElementById("jobForm").style.display = "none";
+      document.getElementById("successMessage").style.display = "block";
+    }, function(error){
+      alert("Failed to submit form. Please try again.");
+      console.log(error);
+    });
+  });
+</script>
+</body>
+</html>
